@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>113306051_Portfolio</title>
+    <style>
+        .form-container {
+            display: none;
+            margin-top: 10px;
+        }
+        .form-container input {
+            margin: 5px 0;
+        }
+        .warning {
+            color: red;
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleEdit() {
+            const nameDisplay = document.getElementById("nameDisplay");
+            const nameInput = document.getElementById("nameInput");
+            const editButton = document.getElementById("editButton");
+
+            if (editButton.textContent === "edit") {
+                nameInput.value = nameDisplay.textContent;
+                nameDisplay.style.display = "none";
+                nameInput.style.display = "inline";
+                editButton.textContent = "save";
+            } else {
+                nameDisplay.textContent = nameInput.value;
+                nameDisplay.style.display = "inline";
+                nameInput.style.display = "none";
+                editButton.textContent = "edit";
+            }
+        }
+
+        function toggleMusicForm() {
+            const form = document.getElementById("musicForm");
+            form.style.display = form.style.display === "block" ? "none" : "block";
+        }
+
+        function addMusic() {
+            const linkInput = document.getElementById("musicLink");
+            const nameInput = document.getElementById("musicName");
+            const warning = document.getElementById("warning");
+
+            const link = linkInput.value.trim();
+            const name = nameInput.value.trim();
+
+            if (!link || !name) {
+                warning.style.display = "block";
+                return;
+            }
+
+            warning.style.display = "none";
+
+            const musicSection = document.getElementById("musicSection");
+
+            const musicItem = document.createElement("div");
+            musicItem.innerHTML = `
+                <a href="${link}" target="_blank"><img src="下載.png" width="60" height="50" alt="music"></a>
+                <div>${name}</div>
+            `;
+            musicSection.appendChild(musicItem);
+
+            linkInput.value = "";
+            nameInput.value = "";
+
+            toggleMusicForm();
+        }
+    </script>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr style="background-color: #76a1ad">
+                <th colspan="3">
+                    <h1>歡迎來到李齊的個人作品集</h1>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th rowspan="4">
+                    <img src="民視綜藝大集合節目錄影_鄭市長：歡迎搭乘機場捷運，來桃園一日小旅行(董至成)(cropped).jpg" width="100" height="150" alt="你董製程嗎">
+                </th>
+                <th>姓名</th>
+                <th>
+                    <div>
+                        <span id="nameDisplay">李齊</span>
+                        <input id="nameInput" type="text" style="display:none">
+                        <button id="editButton" onclick="toggleEdit()">edit</button>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>學校</th>
+                <th>政治大學</th>
+            </tr>
+            <tr>
+                <th>科系</th>
+                <th>資訊管理系</th>
+            </tr>
+            <tr>
+                <th>年級</th>
+                <th>大一</th>
+            </tr>
+            <tr style="background-color: #76a1ad">
+                <th colspan="3">作品集</th>
+            </tr>
+            <tr>
+                <th colspan="3">
+                    <button onclick="toggleMusicForm()">add</button>
+                    <div id="musicForm" class="form-container">
+                        <input id="musicLink" type="text" placeholder="音樂連結">
+                        <input id="musicName" type="text" placeholder="音樂名稱">
+                        <button onclick="addMusic()">提交</button>
+                        <div id="warning" class="warning">請填寫完整信息！</div>
+                    </div>
+                    <div id="musicSection">
+                        <a href="https://www.youtube.com/watch?v=lg7h0b6uTs0" target="_blank">
+                            <img src="下載.png" width="60" height="50" alt="youtube">
+                        </a>
+                        <div>I'm a Taiwan Non style Rock</div>
+                    </div>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
